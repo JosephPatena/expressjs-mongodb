@@ -4,16 +4,16 @@ mongoose.set('strictQuery', false);
 const projectSchema = mongoose.Schema(
   {
     name: {
-      type: String,
-      required: [true, "Please add project name"],
+        type: String,
+        required: [true, "Please add project name"],
     },
     description: {
-      type: String,
-      default: null
+        type: String,
+        default: null
     },
     due_date: {
-      type: Date,
-      default: null
+        type: Date,
+        default: null
     },
     status: {
         type: String,
@@ -22,8 +22,8 @@ const projectSchema = mongoose.Schema(
         default: 'pending'
     },
     image_path: {
-      type: String,
-      default: null
+        type: String,
+        default: null
     },
     created_by: {
         type: mongoose.Schema.Types.ObjectId,

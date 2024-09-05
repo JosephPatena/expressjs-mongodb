@@ -4,12 +4,12 @@ mongoose.set('strictQuery', false);
 const taskSchema = mongoose.Schema(
   {
     name: {
-      type: String,
-      required: [true, "Please add task name"],
+        type: String,
+        required: [true, "Please add task name"],
     },
     description: {
-      type: String,
-      default: null
+        type: String,
+        default: null
     },
     status: {
         type: String,
@@ -24,8 +24,28 @@ const taskSchema = mongoose.Schema(
         default: 'low'
     },
     due_date: {
-      type: Date,
-      default: null
+        type: Date,
+        default: null
+    },
+    project_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Project",
+    },
+    assigned_user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+        ref: "User",
+    },
+    tester_user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+        ref: "User",
+    },
+    reviewer_user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: null,
+        ref: "User",
     },
     start_date: {
         type: Date,
@@ -35,35 +55,15 @@ const taskSchema = mongoose.Schema(
         type: Date,
         default: null
     },
-    assigned_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User",
-    },
-    tester_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User",
-    },
-    reviewer_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User",
-    },
     created_by: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        default: null,
         ref: "User",
     },
     updated_by: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        default: null,
         ref: "User",
-    },
-    project_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Project",
     },
   },
   {

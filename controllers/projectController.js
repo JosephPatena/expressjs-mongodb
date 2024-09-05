@@ -1,7 +1,6 @@
 const projectResource = require("../resources/projectResource");
 const asyncHandler = require("express-async-handler");
 const Project = require('../models/projectModel');
-const User = require('../models/userModel');
 
 //@desc Get All Projects
 //@route GET /api/project/fetch-all
@@ -60,21 +59,12 @@ const createProject = asyncHandler(async (req, res) => {
     due_date,
     status
   } = req.body;
-
-  if (!name || !status) {
-    res.status(400);
-    throw new Error("All fields are mandatory !");
-  }
-
-  user = User.findOne({});
   
   const data = await Project.create({
     name,
     description,
     due_date,
-    status,
-    created_by : user ? user._id : null,
-    updated_by : user ? user._id : null
+    status
   });
 
   res.status(201).json(await projectResource(data));

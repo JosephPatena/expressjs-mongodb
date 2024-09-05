@@ -69,22 +69,16 @@ const createTask = asyncHandler(async (req, res) => {
     reviewer_user_id
   } = req.body;
 
-  if (!name || !status || !priority) {
-    res.status(400);
-    throw new Error("Name, status or priority is mandatory!");
-  }
   const task = await Task.create({
-    project_id,
     name,
     description,
-    due_date,
     status,
     priority,
-    assigned_user_id,
-    tester_user_id,
-    reviewer_user_id,
-    created_by : assigned_user_id,
-    updated_by: assigned_user_id
+    due_date,
+    project_id,
+    assigned_user_id: assigned_user_id != 0 ? assigned_user_id : null,
+    tester_user_id: tester_user_id != 0 ? tester_user_id : null,
+    reviewer_user_id: reviewer_user_id != 0 ? reviewer_user_id : null,
   });
 
   res.status(201).json({ 

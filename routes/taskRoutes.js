@@ -1,3 +1,4 @@
+const { taskRequest, validate } = require('../validators/taskRequest');
 const express = require("express");
 const router = express.Router();
 const {
@@ -11,7 +12,7 @@ const {
 const validateToken = require("../middleware/validateTokenHandler");
 
 // router.use(validateToken);
-router.post("/save", createTask);
+router.post("/save", taskRequest(), validate, createTask);
 router.post("/fetch-all", getTasks);
 router.get("/fetch/:id", getTask);
 router.get("/fetch-figures", getFigures);
